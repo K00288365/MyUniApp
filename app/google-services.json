@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "630551791886",
+    "project_id": "myuniapp-cc58b",
+    "storage_bucket": "myuniapp-cc58b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:630551791886:android:c2e86adb87ee34fc58af5f",
+        "android_client_info": {
+          "package_name": "com.example.myuniapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfRgeeimj1gS8mO9sqnIzX7j3uVVYUDZk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
