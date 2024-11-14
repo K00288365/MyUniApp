@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.my.AddEvent
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
@@ -14,7 +15,7 @@ fun MyApp() {
     var isUserLoggedIn by remember { mutableStateOf(Firebase.auth.currentUser != null) }
 
     if (isUserLoggedIn) {
-        WelcomeScreen()
+        AddEvent()
     } else {
         LoginScreen(onLoginSuccess = {
             isUserLoggedIn = true
