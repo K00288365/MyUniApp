@@ -2,14 +2,17 @@ package com.example.myuniapp.data
 
 import kotlinx.coroutines.flow.Flow
 
-class OfflineEventsRepository private val eventDao: EventDao) : EventsRepository{
-override fun getAllItemsStream(): Flow<List<Event>> = eventDao.getAllEvents()
 
-override fun getItemStream(id: Int): Flow<Event?> = eventDao.getEvent(id)
 
-override suspend fun insertItem(item: Event) = eventDao.insert(item)
+class OfflineEventsRepository(private val eventDao: EventDao) : EventRepository {
 
-override suspend fun deleteItem(item: Event) = eventDao.delete(item)
+    override fun getAllEventsStream(): Flow<List<Event>> = eventDao.getAllEvents()
 
-override suspend fun updateItem(item: Event) = eventDao.update(item)
+    override fun getEventStream(id: Int): Flow<Event?> = eventDao.getEvent(id)
+
+    override suspend fun insert(event: Event) = eventDao.insert(event)
+
+    override suspend fun delete(event: Event) = eventDao.delete(event)
+
+    override suspend fun update(event: Event) = eventDao.update(event)
 }

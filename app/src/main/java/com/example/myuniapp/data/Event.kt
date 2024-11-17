@@ -11,7 +11,8 @@ data class Event (
     val date: String,
     val description: String,
     val location: String,
-    val time: String
+    val startTime: String,
+    val endTime: String
 ){
 
 

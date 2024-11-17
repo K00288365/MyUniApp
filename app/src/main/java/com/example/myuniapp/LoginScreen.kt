@@ -43,7 +43,6 @@ fun LoginScreen(onLoginSuccess: () -> Unit) {
             label = { Text("Email") },
             modifier = Modifier.fillMaxWidth()
         )
-        7
         Spacer(modifier = Modifier.height(16.dp))
         TextField(
             value = password,

@@ -5,6 +5,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.example.myuniapp.data.AppDatabase
 import com.google.firebase.Firebase
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
@@ -12,15 +13,18 @@ import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 
 class MainActivity : ComponentActivity() {
+
+    val AppDatabase = com.example.myuniapp.data.AppDatabase.getDatabase(this)
+
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         auth = Firebase.auth
-        auth.signOut()
+//        auth.signOut()
         FirebaseApp.initializeApp(this)
         setContent {
-            MyApp()
+            MyApp(AppDatabase)
         }
     }
 }
