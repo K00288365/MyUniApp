@@ -1,6 +1,5 @@
 package com.example.my
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -12,12 +11,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults.buttonColors
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -30,15 +26,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
+import androidx.room.Room
+import com.example.myuniapp.AppViewModelProvider
 import com.example.myuniapp.data.AppDatabase
 import com.example.myuniapp.data.Event
-import com.example.myuniapp.data.EventRepository
+import com.example.myuniapp.events.EventViewModel
 import kotlinx.coroutines.launch
 
 @Composable
@@ -48,6 +47,11 @@ fun AddEvent(navController: NavController) {
     var startTime by remember { mutableStateOf("") }
     var endTime by remember { mutableStateOf("") }
     var place by remember { mutableStateOf("") }
+    val coroutineScope = rememberCoroutineScope()
+
+    val context = LocalContext.current
+    val db = AppDatabase.getDatabase(context)
+    val eventDao = db.eventDao()
 
 
     Column(
@@ -179,7 +183,12 @@ fun AddEvent(navController: NavController) {
             horizontalArrangement = Arrangement.Center
         ) {
             Button(
-                onClick = { },
+                onClick = {
+                    val event = Event(title = eventName, date = eventDate, startTime = startTime, endTime = endTime, location = place)
+                    coroutineScope.launch {
+                        eventDao.insert(event)
+                    }
+          },
                 colors = buttonColors(containerColor = Color(0xFF98E4CE)),
                 shape = RoundedCornerShape(5.dp),
                 modifier = Modifier.shadow(4.dp)

@@ -9,7 +9,6 @@ data class Event (
     @PrimaryKey(autoGenerate = true) val id: Int =0,
     val title: String,
     val date: String,
-    val description: String,
     val location: String,
     val startTime: String,
     val endTime: String

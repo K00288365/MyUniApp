@@ -14,7 +14,6 @@ import com.google.firebase.firestore.firestore
 
 class MainActivity : ComponentActivity() {
 
-    val AppDatabase = com.example.myuniapp.data.AppDatabase.getDatabase(this)
 
     private lateinit var auth: FirebaseAuth
 
@@ -24,7 +23,8 @@ class MainActivity : ComponentActivity() {
 //        auth.signOut()
         FirebaseApp.initializeApp(this)
         setContent {
-            MyApp(AppDatabase)
+
+            MyApp()
         }
     }
 }

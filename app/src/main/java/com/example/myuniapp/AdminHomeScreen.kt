@@ -302,16 +302,13 @@ fun ContactDetail(label: String, value: String) {
                 fontSize = 18.sp,
                 modifier = Modifier.align(Alignment.CenterStart)
             )
+            
         }
     }
 }
 
-fun loginUser(
-    email: String,
-    password: String,
-    onSuccess: () -> Unit,
-    onError: (String) -> Unit
-) {
+fun loginUser(email: String, password: String,
+              onSuccess: () -> Unit, onError: (String) -> Unit) {
     val auth = Firebase.auth
     auth.signInWithEmailAndPassword(email, password)
         .addOnCompleteListener { task ->

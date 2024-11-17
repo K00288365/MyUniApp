@@ -62,14 +62,15 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
-    //Firebase
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.auth.ktx) // Firebase Authentication
-    implementation(libs.firebase.firestore.ktx) // Firestore (if needed)
-
     //Cloud Firestore
     implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
     implementation("com.google.firebase:firebase-firestore")
+
+
+    //Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.firestore.ktx)
 
     //Room
     implementation("androidx.room:room-runtime:${rootProject.extra["room_version"]}")
