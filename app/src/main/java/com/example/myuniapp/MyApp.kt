@@ -18,14 +18,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.example.fourpageapp.navigation.DrawerContent
-import com.example.my.AddEvent
-import com.example.myuniapp.data.AppDatabase
-import com.example.myuniapp.data.EventRepository
-import com.example.myuniapp.data.OfflineEventsRepository
 import com.example.myuniapp.navigation.NavigationGraph
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth

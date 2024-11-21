@@ -1,5 +1,6 @@
 package com.example.my
 
+import android.app.Application
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -14,6 +15,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults.buttonColors
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -31,13 +34,11 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.room.Room
-import com.example.myuniapp.AppViewModelProvider
+import com.example.myuniapp.DefaultSnackbar
 import com.example.myuniapp.data.AppDatabase
-import com.example.myuniapp.data.Event
-import com.example.myuniapp.events.EventViewModel
+import com.example.myuniapp.data.event.Event
+import com.example.myuniapp.data.repository.EventRepository
 import kotlinx.coroutines.launch
 
 @Composable
@@ -49,11 +50,18 @@ fun AddEvent(navController: NavController) {
     var place by remember { mutableStateOf("") }
     val coroutineScope = rememberCoroutineScope()
 
-    val context = LocalContext.current
-    val db = AppDatabase.getDatabase(context)
-    val eventDao = db.eventDao()
+    val snackbarHostState = remember { SnackbarHostState() }
 
+    val context = LocalContext.current.applicationContext
+    val repository = EventRepository(context as Application)
 
+    fun resetForm() {
+        eventName = ""
+        eventDate = ""
+        startTime = ""
+        endTime = ""
+        place = ""
+    }
     Column(
         modifier = Modifier
             .fillMaxHeight()
@@ -184,11 +192,23 @@ fun AddEvent(navController: NavController) {
         ) {
             Button(
                 onClick = {
-                    val event = Event(title = eventName, date = eventDate, startTime = startTime, endTime = endTime, location = place)
+                    val event = Event(
+                        title = eventName,
+                        date = eventDate,
+                        startTime = startTime,
+                        endTime = endTime,
+                        location = place
+                    )
                     coroutineScope.launch {
-                        eventDao.insert(event)
+                        repository.insert(event)
+
+                        snackbarHostState.showSnackbar(
+                            message = "Event Added Successfully",
+                            actionLabel = "Undo"
+                        )
                     }
-          },
+                    resetForm()
+                },
                 colors = buttonColors(containerColor = Color(0xFF98E4CE)),
                 shape = RoundedCornerShape(5.dp),
                 modifier = Modifier.shadow(4.dp)
@@ -202,7 +222,7 @@ fun AddEvent(navController: NavController) {
             }
             Spacer(modifier = Modifier.width(4.dp))
             Button(
-                onClick = { },
+                onClick = {resetForm() },
                 colors = buttonColors(containerColor = Color(0xFFE498A5)),
                 shape = RoundedCornerShape(5.dp),
                 modifier = Modifier.shadow(4.dp)
@@ -215,6 +235,16 @@ fun AddEvent(navController: NavController) {
                 )
             }
         }
+        SnackbarHost(
+            hostState = snackbarHostState,
+            snackbar = { data ->
+                DefaultSnackbar(
+                    data = data,
+                    modifier = Modifier.padding(16.dp),
+                    onDismiss = { data.dismiss() }
+                )
+            }
+        )
     }
 }
 

@@ -76,6 +76,7 @@ dependencies {
     implementation("androidx.room:room-runtime:${rootProject.extra["room_version"]}")
     implementation(libs.androidx.ui.test.android)
     implementation(libs.androidx.navigation.compose)
+//    implementation(libs.androidx.ui.desktop)
     ksp("androidx.room:room-compiler:${rootProject.extra["room_version"]}")
     implementation("androidx.room:room-ktx:${rootProject.extra["room_version"]}")
 

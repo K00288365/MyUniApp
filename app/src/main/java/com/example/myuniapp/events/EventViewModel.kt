@@ -4,10 +4,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.myuniapp.data.Event
-import com.example.myuniapp.data.EventRepository
-import kotlinx.coroutines.launch
+import com.example.myuniapp.data.event.Event
+import com.example.myuniapp.data.repository.EventRepository
 
 class EventViewModel(private val eventRepository: EventRepository): ViewModel() {
     var eventUiState by mutableStateOf(EventUiState())

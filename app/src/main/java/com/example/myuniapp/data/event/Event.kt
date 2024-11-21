@@ -1,8 +1,7 @@
-package com.example.myuniapp.data
+package com.example.myuniapp.data.event
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.sql.Time
 
 @Entity(tableName ="events")
 data class Event (
