@@ -21,6 +21,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.example.fourpageapp.navigation.DrawerContent
+import com.example.myuniapp.UserScreens.RegisterUser
 import com.example.myuniapp.navigation.NavigationGraph
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
@@ -33,7 +34,7 @@ fun MyApp() {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val coroutineScope = rememberCoroutineScope()
     val navController = rememberNavController()
-
+    var showRegisterScreen by remember { mutableStateOf(false) }
 
     if (isUserLoggedIn) {
         ModalNavigationDrawer(
@@ -69,11 +70,20 @@ fun MyApp() {
             }
         }
     } else {
-        LoginScreen(onLoginSuccess = {
-            isUserLoggedIn = true
-        })
+        if (showRegisterScreen) {
+            RegisterUser(
+                onRegisterSuccess = { isUserLoggedIn = true },
+                SwitchToLogin = { showRegisterScreen = false }
+            )
+        } else {
+            LoginScreen(
+                onLoginSuccess = { isUserLoggedIn = true },
+                SwitchToRegister = { showRegisterScreen = true }
+            )
+        }
     }
 }
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {

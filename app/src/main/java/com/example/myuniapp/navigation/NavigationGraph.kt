@@ -5,9 +5,10 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.my.AddEvent
-import com.example.myuniapp.AdminHomeScreen
-
+import com.example.myuniapp.AdminScreens.AdminHomeScreen
+import com.example.myuniapp.AdminScreens.ViewAllEvents
+import com.example.myuniapp.ui.theme.pages.AddEventScreen
+import com.example.myuniapp.ui.theme.pages.UpdateEventScreen
 
 
 @Composable
@@ -17,9 +18,15 @@ fun NavigationGraph(
         composable("home") {
             AdminHomeScreen(navController)
         }
-
         composable("AddEvent") {
-            AddEvent(navController)
+            AddEventScreen(navController)
+        }
+//        composable("UpdateEvent") {
+//                UpdateEventScreen(navController)
+//            }
+
+        composable("ViewAllEvents") {
+            ViewAllEvents(navController)
         }
 
     }

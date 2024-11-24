@@ -30,7 +30,7 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState) {
 
         TextButton(onClick = {
             coroutineScope.launch {
-//                drawerState.close()
+                drawerState.close()
                 navController.navigate("AddEvent")
             }
         }) {

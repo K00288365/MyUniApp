@@ -1,4 +1,4 @@
-package com.example.myuniapp
+package com.example.myuniapp.AdminScreens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -28,8 +28,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
+import com.example.myuniapp.ui.theme.atoms.Header
+import com.example.myuniapp.ui.theme.atoms.PrimaryButton
+import com.example.myuniapp.ui.theme.molecules.CardLayout
 
 
 @Composable
@@ -41,47 +42,27 @@ fun AdminHomeScreen(navController: NavHostController) {
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-            item {
-                Spacer(modifier = Modifier.height(64.dp))
-            }
-            item {
-                Header()
-            }
-            item {
-                Description()
-            }
-            item {
-                MemberCount()
-            }
-            item {
-                UpcomingEvents(navController)
-            }
-            item {
-                ContactInformation()
-            }
+        item {
+            Spacer(modifier = Modifier.height(64.dp))
+        }
+        item {
+            Header("Welcome to The Tech Society")
+        }
+        item {
+            Description()
+        }
+        item {
+            MemberCount()
+        }
+        item {
+            UpcomingEvents(navController)
+        }
+        item {
+            ContactInformation()
         }
     }
-
-@Composable
-fun Header() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color(0xFF90CAF9))
-            .padding(14.dp),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            text = "   Welcome to " +
-                    "The Tech Society",
-            color = Color.Black,
-            fontSize = 30.sp,
-            fontWeight = FontWeight.Bold,
-            style = TextStyle(fontSize = 30.sp)
-        )
-    }
 }
+
 
 @Composable
 fun Description() {
@@ -97,7 +78,7 @@ fun Description() {
                 fontSize = 20.sp
             )
             Button(
-                onClick = {  },
+                onClick = { },
                 colors = buttonColors(containerColor = Color(0xFF98E4CE)),
                 shape = RoundedCornerShape(5.dp),
                 modifier = Modifier.shadow(4.dp)
@@ -170,11 +151,11 @@ fun UpcomingEvents(navController: NavHostController) {
                     .fillMaxWidth()
                     .padding(8.dp)
             ) {
-                EventDetail("Event:", "Hackathon")
-                EventDetail("Date:", "09/11/2024")
-                EventDetail("Time:", "14:00 to 17:00")
-                EventDetail("Location:", "Student Union")
-                EventDetail("Attending:", "17")
+                CardLayout(label = "Event:", value = "Hackathon")
+                CardLayout(label = "Date:", value = "09/11/2024")
+                CardLayout(label = "Time:", value = "14:00 to 17:00")
+                CardLayout(label = "Location:", value = "Student Union")
+                CardLayout(label = "Attending:", value = "17")
             }
         }
         Spacer(modifier = Modifier.height(8.dp))
@@ -182,67 +163,20 @@ fun UpcomingEvents(navController: NavHostController) {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Button(
-                onClick = { navController.navigate("AddEvent")  },
-                colors = buttonColors(containerColor = Color(0xFF98E4CE)),
-                shape = RoundedCornerShape(5.dp),
+            PrimaryButton(
+                text = "Create",
+                onClick = { navController.navigate("AddEvent") },
                 modifier = Modifier.shadow(4.dp)
-            ) {
-                Text(
-                    text = "Create",
-                    fontSize = 18.sp,
-                    color = Color.Black,
-                    modifier = Modifier.padding(vertical = 7.dp, horizontal = 29.dp)
-                )
-            }
-            Button(
-                onClick = {  },
-                colors = buttonColors(containerColor = Color(0xFF98E4CE)),
-                shape = RoundedCornerShape(5.dp),
+            )
+            PrimaryButton(
+                text = "View",
+                onClick = { navController.navigate("ViewAllEvents") },
                 modifier = Modifier.shadow(4.dp)
-            ) {
-                Text(
-                    text = "View Events",
-                    fontSize = 18.sp,
-                    color = Color.Black,
-                    modifier = Modifier.padding(vertical = 7.dp, horizontal = 29.dp)
-                )
-            }
-        }
-    }
-}
-
-@Composable
-fun EventDetail(label: String, value: String) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 5.dp),
-        horizontalArrangement = Arrangement.Start,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Spacer(modifier = Modifier.weight(1f))
-
-        Text(
-            text = label,
-            fontSize = 20.sp,
-            modifier = Modifier.padding(start = 100.dp, end = 20.dp)
-        )
-
-        Box(
-            modifier = Modifier
-                .background(Color(0xFFBBDEFB))
-                .fillMaxWidth()
-                .padding(8.dp)
-        ) {
-            Text(
-                text = value,
-                fontSize = 18.sp,
-                modifier = Modifier.align(Alignment.CenterStart)
             )
         }
     }
 }
+
 
 @Composable
 fun ContactInformation() {
@@ -267,8 +201,8 @@ fun ContactInformation() {
                     .fillMaxWidth()
                     .padding(8.dp)
             ) {
-                ContactDetail("Email", "techsociety@gmail.com")
-                ContactDetail("Phone:", "0831234567")
+                CardLayout(label = "Email:", value = "techsociety@gmail.com")
+                CardLayout(label = "Phone:", value = "0831234567")
             }
         }
     }
@@ -302,21 +236,7 @@ fun ContactDetail(label: String, value: String) {
                 fontSize = 18.sp,
                 modifier = Modifier.align(Alignment.CenterStart)
             )
-            
+
         }
     }
 }
-
-fun loginUser(email: String, password: String,
-              onSuccess: () -> Unit, onError: (String) -> Unit) {
-    val auth = Firebase.auth
-    auth.signInWithEmailAndPassword(email, password)
-        .addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                onSuccess()
-            } else {
-                onError(task.exception?.message ?: "An error occurred")
-            }
-        }
-}
-
