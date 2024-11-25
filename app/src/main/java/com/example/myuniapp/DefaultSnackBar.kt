@@ -13,6 +13,7 @@ fun DefaultSnackbar(
     modifier: Modifier = Modifier,
     onDismiss: () -> Unit
 ) {
+
     Snackbar(
         modifier = modifier,
         content = {

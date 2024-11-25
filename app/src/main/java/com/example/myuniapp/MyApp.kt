@@ -18,11 +18,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import com.example.fourpageapp.navigation.DrawerContent
 import com.example.myuniapp.UserScreens.RegisterUser
 import com.example.myuniapp.navigation.NavigationGraph
+import com.example.myuniapp.ui.theme.atoms.PrimaryButton
+import com.example.myuniapp.ui.theme.atoms.SecondaryButton
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import kotlinx.coroutines.launch
@@ -58,7 +63,18 @@ fun MyApp() {
                                         drawerState.close()
                                     }
                                 }
-                            }) {
+
+//                                SecondaryButton(
+//                                    text = "Log Out",
+//                                    onClick = { auth.signOut()
+//                                    },
+//                                    modifier = Modifier.shadow(4.dp)
+//                                )
+
+                            }
+
+
+                            ) {
                                 Icon(Icons.Filled.Menu, contentDescription = "Menu Icon")
                             }
                         }

@@ -46,13 +46,7 @@ fun ViewAllEvents(navController: NavController) {
     val repository = remember { EventRepository(context as Application) }
 
     val coroutineScope = rememberCoroutineScope()
-    val events = remember { mutableStateOf<List<Event>>(emptyList()) }
 
-    LaunchedEffect(Unit) {
-        repository.getAllEvents().collect { newEvents ->
-            events.value = newEvents
-        }
-    }
 
     Column(
         modifier = Modifier
@@ -78,20 +72,21 @@ fun ViewAllEvents(navController: NavController) {
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
-        if (events.value.isEmpty()) {
             Text(
                 text = "No upcoming events available.",
                 fontSize = 16.sp,
                 color = Color.Gray,
                 modifier = Modifier.padding(top = 16.dp)
             )
-        } else {
-            events.value.forEach { event ->
-                EventCard(event = event, navController = navController, repository = repository)
-            }
         }
-    }
-}
+//    else {
+//            val event = repository.getEvent()
+//                EventCard(event = event, navController = navController, repository = repository)
+//            }
+
+        }
+
+
 
 @Composable
 private fun EventCard(event: Event, navController: NavController, repository: EventRepository) {

@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.myuniapp"
-    compileSdk = 35 //changed to 35 from 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.myuniapp"
@@ -65,7 +65,6 @@ dependencies {
     //Cloud Firestore
     implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
     implementation("com.google.firebase:firebase-firestore")
-
 
     //Firebase
     implementation(platform(libs.firebase.bom))
