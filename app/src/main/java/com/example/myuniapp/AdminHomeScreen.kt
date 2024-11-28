@@ -307,6 +307,7 @@ fun ContactDetail(label: String, value: String) {
     }
 }
 
+<<<<<<< Updated upstream:app/src/main/java/com/example/myuniapp/AdminHomeScreen.kt
 fun loginUser(email: String, password: String,
               onSuccess: () -> Unit, onError: (String) -> Unit) {
     val auth = Firebase.auth
@@ -320,3 +321,5 @@ fun loginUser(email: String, password: String,
         }
 }
 
+=======
+>>>>>>> Stashed changes:app/src/main/java/com/example/myuniapp/UserScreens/UserHomeScreen.kt

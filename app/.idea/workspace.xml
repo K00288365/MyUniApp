@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="94344199-208d-43fa-a146-26729deb8ee6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.idea/deploymentTargetSelector.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/deploymentTargetSelector.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/myuniapp/AdminHomeScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/myuniapp/AdminScreens/AdminHomeScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/myuniapp/LoginScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/myuniapp/LoginScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/myuniapp/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/myuniapp/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/myuniapp/MyApp.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/myuniapp/MyApp.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/myuniapp/UserScreens/RegisterUser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/myuniapp/UserScreens/RegisterUser.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/myuniapp/data/repository/EventRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/myuniapp/data/repository/EventRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/myuniapp/events/AddEvent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/myuniapp/AdminScreens/AddEvent.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/myuniapp/events/EventViewModel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/myuniapp/navigation/DrawerContent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/myuniapp/navigation/DrawerContent.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/myuniapp/navigation/NavigationGraph.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/myuniapp/navigation/NavigationGraph.kt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2pGnrDBw9BAdHeZYqFeGw1vQgc9" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="openDirectoriesWithSingleClick" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "android.gradle.sync.needed": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/sophi/OneDrive/Documents/GitHub/MyUniApp"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="94344199-208d-43fa-a146-26729deb8ee6" name="Changes" comment="" />
+      <created>1732401476367</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1732401476367</updated>
+    </task>
+    <servers />
+  </component>
+</project>
