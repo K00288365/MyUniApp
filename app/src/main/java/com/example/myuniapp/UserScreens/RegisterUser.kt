@@ -1,17 +1,9 @@
 package com.example.myuniapp.UserScreens
 
-<<<<<<< Updated upstream
-import androidx.compose.runtime.Composable
 
-@Composable
-fun RegisterUser(){
-
-}
-=======
 import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.compose.foundation.Image
-import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -32,6 +24,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -171,5 +164,3 @@ private fun registerStudent(
         }
 }
 
-
->>>>>>> Stashed changes
