@@ -57,7 +57,12 @@ fun LoginScreen(onLoginSuccess: () -> Unit, SwitchToRegister: () -> Unit) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Login header
+
+            HeaderLogin("The Tech Society")
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+
             Text(text = "Login", fontSize = 24.sp, fontWeight = FontWeight.Bold, color = Color.White)
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -73,7 +78,6 @@ fun LoginScreen(onLoginSuccess: () -> Unit, SwitchToRegister: () -> Unit) {
                         .padding(16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    // Email TextField
                     TextField(
                         value = email,
                         onValueChange = { email = it },
@@ -84,7 +88,6 @@ fun LoginScreen(onLoginSuccess: () -> Unit, SwitchToRegister: () -> Unit) {
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    // Password TextField
                     TextField(
                         value = password,
                         onValueChange = { password = it },
@@ -96,14 +99,12 @@ fun LoginScreen(onLoginSuccess: () -> Unit, SwitchToRegister: () -> Unit) {
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    // Show error message if any
                     if (errorMessage.isNotEmpty()) {
                         Text(text = errorMessage, color = Color.Red, fontSize = 14.sp)
                     }
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    // Login Button
                     Button(onClick = {
                         loginUser(email, password, onSuccess = {
                             onLoginSuccess()
