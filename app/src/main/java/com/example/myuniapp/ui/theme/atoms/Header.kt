@@ -34,3 +34,23 @@ fun Header(title: String) {
     }
 }
 
+@Composable
+fun HeaderLogin(title: String) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color(0xFF90CAF9))
+            .padding(20.dp),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = title,
+            color = Color.Black,
+            fontWeight = FontWeight.Bold,
+            style = TextStyle(fontSize = 25.sp)
+        )
+    }
+}
+
+

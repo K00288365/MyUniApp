@@ -1,6 +1,7 @@
 package com.example.myuniapp
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -61,6 +62,15 @@ fun MyApp() {
                             }) {
                                 Icon(Icons.Filled.Menu, contentDescription = "Menu Icon")
                             }
+                        },
+                        actions = {
+                            IconButton(onClick = {
+                                Firebase.auth.signOut()
+                                isUserLoggedIn = false
+                            }) {
+                                Icon(Icons.Filled.ExitToApp, contentDescription = "Logout")
+                            }
+
                         }
                     )
                 }

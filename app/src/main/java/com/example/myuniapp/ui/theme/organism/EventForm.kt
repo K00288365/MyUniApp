@@ -9,6 +9,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.myuniapp.ui.theme.atoms.PrimaryButton
 import com.example.myuniapp.ui.theme.atoms.SecondaryButton
+import com.example.myuniapp.ui.theme.molecules.DatePickerForm
 import com.example.myuniapp.ui.theme.molecules.FormField
 import com.example.myuniapp.ui.theme.molecules.TimeInputFields
 
@@ -39,9 +40,7 @@ fun EventForm(
     ) {
 
         FormField(
-            "Event Name",
-            value = eventName,
-            onValueChange = onEventNameChange
+            "Event Name", value = eventName, onValueChange = onEventNameChange
         )
 
 
@@ -50,10 +49,13 @@ fun EventForm(
         }
 
         Spacer(modifier = Modifier.height(8.dp))
-        FormField("Date", value = eventDate, onValueChange = onEventDateChange)
-        if (eventDateError.isNotEmpty()) {
-            Text(text = eventDateError, color = Color.Red, fontSize = 14.sp)
-        }
+
+
+        Text(text = "Event Date", fontSize = 16.sp)
+        DatePickerForm(
+            date = eventDate,
+            onDateSelected = { selectedDate -> onEventDateChange(selectedDate) }
+        )
 
         Spacer(modifier = Modifier.height(8.dp))
         TimeInputFields(

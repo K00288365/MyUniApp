@@ -1,7 +1,16 @@
 package com.example.myuniapp.UserScreens
 
+<<<<<<< Updated upstream
+import androidx.compose.runtime.Composable
+
+@Composable
+fun RegisterUser(){
+
+}
+=======
 import android.content.ContentValues.TAG
 import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,13 +30,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.material3.TextField
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import com.example.myuniapp.R
+import com.example.myuniapp.ui.theme.atoms.HeaderLogin
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -39,60 +51,91 @@ fun RegisterUser(onRegisterSuccess: () -> Unit, SwitchToLogin: () -> Unit) {
     val auth = FirebaseAuth.getInstance()
     val firestore = FirebaseFirestore.getInstance()
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(text = "Register", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+    Box(modifier = Modifier.fillMaxSize()) {
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        TextField(
-            value = email,
-            onValueChange = { email = it },
-            label = { Text("Email") },
-            modifier = Modifier.fillMaxWidth()
+        Image(
+            painter = painterResource(id = R.drawable.techsociety),
+            contentDescription = "Background Image",
+            modifier = Modifier.fillMaxSize()
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
 
-        TextField(
-            value = password,
-            onValueChange = { password = it },
-            label = { Text("Password") },
-            modifier = Modifier.fillMaxWidth(),
-            visualTransformation = PasswordVisualTransformation()
-        )
+            HeaderLogin("The Tech Society")
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-        if (errorMessage.isNotEmpty()) {
-            Text(text = errorMessage, color = Color.Red)
-        }
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Text(text = "Register", fontSize = 24.sp, fontWeight = FontWeight.Bold, color = Color.White)
 
-        // Register Button
-        Button(onClick = {
-            registerStudent(auth, firestore, email, password, onSuccess = {
-                onRegisterSuccess()
-            }, onError = { error ->
-                errorMessage = error
-            })
-        }) {
-            Text(text = "Register")
-        }
+            Spacer(modifier = Modifier.height(16.dp))
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                shape = MaterialTheme.shapes.medium.copy(CornerSize(16.dp)),
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    TextField(
+                        value = email,
+                        onValueChange = { email = it },
+                        label = { Text("Email") },
+                        modifier = Modifier.fillMaxWidth(),
+                        singleLine = true
+                    )
 
-        TextButton(onClick = SwitchToLogin) {
-            Text("Already have an account? Login")
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    TextField(
+                        value = password,
+                        onValueChange = { password = it },
+                        label = { Text("Password") },
+                        modifier = Modifier.fillMaxWidth(),
+                        visualTransformation = PasswordVisualTransformation(),
+                        singleLine = true
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    // Show error message if any
+                    if (errorMessage.isNotEmpty()) {
+                        Text(text = errorMessage, color = Color.Red, fontSize = 14.sp)
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    // Register button
+                    Button(onClick = {
+                        registerStudent(auth, firestore, email, password, onSuccess = {
+                            onRegisterSuccess()
+                        }, onError = { error ->
+                            errorMessage = error
+                        })
+                    }) {
+                        Text(text = "Register")
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    TextButton(onClick = SwitchToLogin) {
+                        Text("Already have an account? Login", color = Color.Black)
+                    }
+                }
+            }
         }
     }
 }
+
 
 private fun registerStudent(
     auth: FirebaseAuth,
@@ -128,3 +171,5 @@ private fun registerStudent(
         }
 }
 
+
+>>>>>>> Stashed changes

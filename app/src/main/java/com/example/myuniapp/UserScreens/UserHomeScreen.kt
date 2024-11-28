@@ -1,4 +1,4 @@
-package com.example.myuniapp.UserScreens
+package com.example.myuniapp
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -28,14 +28,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.myuniapp.AdminScreens.ContactDetail
-import com.example.myuniapp.ui.theme.molecules.CardLayout
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
 
 @Composable
-fun UserHomeScreen(navController: NavHostController) {
+fun AdminHomeScreen(navController: NavHostController) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -47,25 +45,25 @@ fun UserHomeScreen(navController: NavHostController) {
                 Spacer(modifier = Modifier.height(64.dp))
             }
             item {
-                Header2()
+                Header()
             }
             item {
-                Description2()
+                Description()
             }
             item {
-                MemberCount2()
+                MemberCount()
             }
             item {
-                UpcomingEvents2(navController)
+                UpcomingEvents(navController)
             }
             item {
-                ContactInformation2()
+                ContactInformation()
             }
         }
     }
 
 @Composable
-fun Header2() {
+fun Header() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -86,7 +84,7 @@ fun Header2() {
 }
 
 @Composable
-fun Description2() {
+fun Description() {
     Column {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -98,6 +96,19 @@ fun Description2() {
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 20.sp
             )
+            Button(
+                onClick = {  },
+                colors = buttonColors(containerColor = Color(0xFF98E4CE)),
+                shape = RoundedCornerShape(5.dp),
+                modifier = Modifier.shadow(4.dp)
+            ) {
+                Text(
+                    text = "Edit",
+                    fontSize = 18.sp,
+                    color = Color.Black,
+                    modifier = Modifier.padding(vertical = 7.dp, horizontal = 29.dp)
+                )
+            }
         }
         Spacer(modifier = Modifier.height(10.dp))
         Text(
@@ -113,7 +124,7 @@ fun Description2() {
 }
 
 @Composable
-fun MemberCount2() {
+fun MemberCount() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -138,7 +149,7 @@ fun MemberCount2() {
 }
 
 @Composable
-fun UpcomingEvents2(navController: NavHostController) {
+fun UpcomingEvents(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -159,11 +170,11 @@ fun UpcomingEvents2(navController: NavHostController) {
                     .fillMaxWidth()
                     .padding(8.dp)
             ) {
-                CardLayout("Event:", "Hackathon")
-                CardLayout("Date:", "09/11/2024")
-                CardLayout("Time:", "14:00 to 17:00")
-                CardLayout("Location:", "Student Union")
-                CardLayout("Attending:", "17")
+                EventDetail("Event:", "Hackathon")
+                EventDetail("Date:", "09/11/2024")
+                EventDetail("Time:", "14:00 to 17:00")
+                EventDetail("Location:", "Student Union")
+                EventDetail("Attending:", "17")
             }
         }
         Spacer(modifier = Modifier.height(8.dp))
@@ -171,6 +182,19 @@ fun UpcomingEvents2(navController: NavHostController) {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
+            Button(
+                onClick = { navController.navigate("AddEvent")  },
+                colors = buttonColors(containerColor = Color(0xFF98E4CE)),
+                shape = RoundedCornerShape(5.dp),
+                modifier = Modifier.shadow(4.dp)
+            ) {
+                Text(
+                    text = "Create",
+                    fontSize = 18.sp,
+                    color = Color.Black,
+                    modifier = Modifier.padding(vertical = 7.dp, horizontal = 29.dp)
+                )
+            }
             Button(
                 onClick = {  },
                 colors = buttonColors(containerColor = Color(0xFF98E4CE)),
@@ -189,7 +213,7 @@ fun UpcomingEvents2(navController: NavHostController) {
 }
 
 @Composable
-fun EventDetail2(label: String, value: String) {
+fun EventDetail(label: String, value: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -221,7 +245,7 @@ fun EventDetail2(label: String, value: String) {
 }
 
 @Composable
-fun ContactInformation2() {
+fun ContactInformation() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -243,15 +267,15 @@ fun ContactInformation2() {
                     .fillMaxWidth()
                     .padding(8.dp)
             ) {
-                CardLayout("Email", "techsociety@gmail.com")
-                CardLayout("Phone:", "0831234567")
+                ContactDetail("Email", "techsociety@gmail.com")
+                ContactDetail("Phone:", "0831234567")
             }
         }
     }
 }
 
 @Composable
-fun ContactDetail2(label: String, value: String) {
+fun ContactDetail(label: String, value: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -283,6 +307,7 @@ fun ContactDetail2(label: String, value: String) {
     }
 }
 
+<<<<<<< Updated upstream:app/src/main/java/com/example/myuniapp/AdminHomeScreen.kt
 fun loginUser(email: String, password: String,
               onSuccess: () -> Unit, onError: (String) -> Unit) {
     val auth = Firebase.auth
@@ -296,17 +321,5 @@ fun loginUser(email: String, password: String,
         }
 }
 
-fun registerUser(email: String, password: String,
-                 onSuccess: () -> Unit, onError: (String) -> Unit) {
-    val auth = Firebase.auth
-    auth.createUserWithEmailAndPassword(email, password)
-        .addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                onSuccess()
-            } else {
-                onError(task.exception?.message ?: "Registration failed")
-            }
-        }
-}
-
-
+=======
+>>>>>>> Stashed changes:app/src/main/java/com/example/myuniapp/UserScreens/UserHomeScreen.kt
