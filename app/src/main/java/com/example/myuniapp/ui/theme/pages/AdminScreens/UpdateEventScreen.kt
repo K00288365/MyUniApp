@@ -1,7 +1,6 @@
-package com.example.myuniapp.ui.theme.pages
+package com.example.myuniapp.ui.theme.pages.AdminScreens
 
 import com.example.myuniapp.ui.theme.organism.EventForm
-
 
 import android.app.Application
 import androidx.compose.foundation.layout.Column
@@ -13,11 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.myuniapp.AdminScreens.validateEndTime
-import com.example.myuniapp.AdminScreens.validateEventDate
-import com.example.myuniapp.AdminScreens.validateEventName
-import com.example.myuniapp.AdminScreens.validateLocation
-import com.example.myuniapp.AdminScreens.validateStartTime
+import com.example.myuniapp.validateEndTime
+import com.example.myuniapp.validateEventDate
+import com.example.myuniapp.validateEventName
+import com.example.myuniapp.validateLocation
+import com.example.myuniapp.validateStartTime
 import com.example.myuniapp.data.event.Event
 import com.example.myuniapp.data.repository.EventRepository
 import com.example.myuniapp.ui.theme.atoms.Header
@@ -25,7 +24,7 @@ import com.example.myuniapp.ui.theme.molecules.Snackbar
 import kotlinx.coroutines.launch
 
 @Composable
-fun AddEventScreen(navController: NavController) {
+fun UpdateEventScreen(navController: NavController) {
     var eventName by remember { mutableStateOf("") }
     var eventDate by remember { mutableStateOf("") }
     var startTime by remember { mutableStateOf("") }
@@ -57,9 +56,10 @@ fun AddEventScreen(navController: NavController) {
         endTimeError = ""
         locationError = ""
     }
+
     Column(modifier = Modifier.padding(16.dp)) {
         Spacer(Modifier.padding(30.dp))
-        Header("Create Event")
+        Header("Update Event")
 
         EventForm(eventName = eventName,
             onEventNameChange = { eventName = it },
@@ -84,14 +84,13 @@ fun AddEventScreen(navController: NavController) {
                 endTimeError = validateEndTime(endTime)
                 locationError = validateLocation(location)
 
-                if (eventNameError.isEmpty() && eventDateError.isEmpty() && startTimeError.isEmpty() && endTimeError.isEmpty() && locationError.isEmpty()) {
+                if (eventNameError.isEmpty() && eventDateError.isEmpty() && startTimeError.isEmpty() &&
+                    endTimeError.isEmpty() && locationError.isEmpty()
+                ) {
 
                     val event = Event(
-                        title = eventName,
-                        date = eventDate,
-                        startTime = startTime,
-                        endTime = endTime,
-                        location = location
+                        title = eventName, date = eventDate,
+                        startTime = startTime, endTime = endTime, location = location
                     )
 
                     coroutineScope.launch {
@@ -105,7 +104,8 @@ fun AddEventScreen(navController: NavController) {
                     }
                 }
             },
-            resetForm = { resetForm() })
+            resetForm = { resetForm() }
+        )
         Snackbar(snackbarHostState = snackbarHostState)
     }
 }

@@ -1,4 +1,4 @@
-package com.example.myuniapp.AdminScreens
+package com.example.myuniapp
 
 
 fun validateEventName(eventName: String): String {

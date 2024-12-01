@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         auth = Firebase.auth
-        auth.signOut()
+//        auth.signOut()
         FirebaseApp.initializeApp(this)
         setContent {
             MyApp()

@@ -22,7 +22,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.example.fourpageapp.navigation.DrawerContent
-import com.example.myuniapp.UserScreens.RegisterUser
+import com.example.myuniapp.ui.theme.pages.UserScreens.RegisterUser
 import com.example.myuniapp.navigation.NavigationGraph
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth

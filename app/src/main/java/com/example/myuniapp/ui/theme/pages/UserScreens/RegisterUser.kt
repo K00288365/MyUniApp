@@ -1,4 +1,4 @@
-package com.example.myuniapp.UserScreens
+package com.example.myuniapp.ui.theme.pages.UserScreens
 
 
 import android.content.ContentValues.TAG

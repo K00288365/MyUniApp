@@ -5,10 +5,9 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.myuniapp.AdminScreens.AdminHomeScreen
-import com.example.myuniapp.AdminScreens.ViewAllEvents
-import com.example.myuniapp.ui.theme.pages.AddEventScreen
-import com.example.myuniapp.ui.theme.pages.UpdateEventScreen
+import com.example.myuniapp.ui.theme.pages.AdminScreens.AdminHomeScreen
+import com.example.myuniapp.ui.theme.pages.AdminScreens.ViewAllEvents
+import com.example.myuniapp.ui.theme.pages.AdminScreens.AddEventScreen
 
 
 @Composable

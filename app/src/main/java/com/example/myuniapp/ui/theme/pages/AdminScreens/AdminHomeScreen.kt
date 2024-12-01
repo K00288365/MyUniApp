@@ -1,5 +1,8 @@
-package com.example.myuniapp.AdminScreens
+package com.example.myuniapp.ui.theme.pages.AdminScreens
 
+import android.app.Application
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -19,18 +22,27 @@ import androidx.compose.material3.ButtonDefaults.buttonColors
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.myuniapp.data.repository.EventRepository
 import com.example.myuniapp.ui.theme.atoms.Header
 import com.example.myuniapp.ui.theme.atoms.PrimaryButton
 import com.example.myuniapp.ui.theme.molecules.CardLayout
+import com.google.firebase.firestore.AggregateSource
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 @Composable
@@ -106,6 +118,24 @@ fun Description() {
 
 @Composable
 fun MemberCount() {
+    var memberCount by remember { mutableStateOf(0) }
+    val db = FirebaseFirestore.getInstance()
+
+    LaunchedEffect(Unit) {
+        val query = db.collection("users")
+        val countQuery = query.count()
+
+        countQuery.get(AggregateSource.SERVER).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val snapshot = task.result
+                memberCount = snapshot.count.toInt()
+                Log.d(TAG, "Count: ${snapshot.count}")
+            } else {
+                Log.e(TAG, "Count failed: ", task.exception)
+            }
+        }
+    }
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -120,7 +150,7 @@ fun MemberCount() {
         )
         Spacer(modifier = Modifier.width(16.dp))
         Text(
-            text = "35",
+            text = memberCount.toString(),
             modifier = Modifier
                 .background(Color.White)
                 .padding(6.dp),
@@ -131,6 +161,30 @@ fun MemberCount() {
 
 @Composable
 fun UpcomingEvents(navController: NavHostController) {
+
+    val context = LocalContext.current.applicationContext
+    val repository = EventRepository(context as Application)
+    val db = FirebaseFirestore.getInstance()
+    val eventName = remember { mutableStateOf("") }
+    val eventDate = remember { mutableStateOf("") }
+    val eventLocation = remember { mutableStateOf("") }
+    val eventStartTime = remember { mutableStateOf("") }
+    val eventEndTime = remember { mutableStateOf("") }
+
+    LaunchedEffect(Unit) {
+        val event = db.collection("events").limit(1)
+        event.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val document = task.result.documents.get(0)
+
+                eventName.value = document.getString("eventName").toString()
+                eventDate.value = document.getString("date").toString()
+                eventLocation.value = document.getString("location").toString()
+                eventStartTime.value = document.getString("startTime").toString()
+                eventEndTime.value = document.getString("endTime").toString()
+            }
+        }
+    }
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -143,19 +197,23 @@ fun UpcomingEvents(navController: NavHostController) {
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
         Spacer(modifier = Modifier.height(4.dp))
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp)
-            ) {
-                CardLayout(label = "Event:", value = "Hackathon")
-                CardLayout(label = "Date:", value = "09/11/2024")
-                CardLayout(label = "Time:", value = "14:00 to 17:00")
-                CardLayout(label = "Location:", value = "Student Union")
-                CardLayout(label = "Attending:", value = "17")
+
+        if (eventName.value.isEmpty()) {
+            Text(
+                text = "Loading...",
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold
+            )
+        } else {
+            Card(modifier = Modifier.fillMaxWidth()) {
+                Column(modifier = Modifier.padding(8.dp)) {
+                    Text(text = "Event Name: ${eventName.value}")
+                    Text(text = "Event Date: ${eventDate.value}")
+                    Text(text = "Event Location: ${eventLocation.value}")
+                    Text(text = "Start Time: ${eventStartTime.value}")
+                    Text(text = "End Time: ${eventEndTime.value}")
+                }
             }
         }
         Spacer(modifier = Modifier.height(8.dp))
@@ -176,6 +234,7 @@ fun UpcomingEvents(navController: NavHostController) {
         }
     }
 }
+
 
 
 @Composable
