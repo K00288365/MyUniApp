@@ -34,9 +34,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.myuniapp.data.repository.EventRepository
 import com.example.myuniapp.ui.theme.atoms.Header
 import com.example.myuniapp.ui.theme.atoms.PrimaryButton
@@ -301,3 +303,9 @@ fun ContactDetail(label: String, value: String) {
         }
     }
 }
+    @Preview(showBackground = true)
+    @Composable
+    fun AdminHomeScreenPreview() {
+        val navController = rememberNavController()
+        AdminHomeScreen(navController = navController)
+    }

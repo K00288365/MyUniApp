@@ -1,4 +1,4 @@
-package com.example.myuniapp
+package com.example.myuniapp.navigation
 
 import androidx.compose.ui.graphics.vector.ImageVector
 

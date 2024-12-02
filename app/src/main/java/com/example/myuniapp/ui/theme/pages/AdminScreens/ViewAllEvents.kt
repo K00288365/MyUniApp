@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -27,6 +29,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.myuniapp.data.event.Event
 import com.example.myuniapp.data.repository.EventRepository
 import com.example.myuniapp.ui.theme.atoms.PrimaryButton
@@ -80,51 +83,66 @@ fun ViewAllEvents(navController: NavController) {
                 modifier = Modifier.padding(top = 16.dp)
             )
         } else {
-            events.value.forEach { event ->
-                EventCard(event = event, navController = navController, repository = repository)
+            LazyColumn(
+                modifier = Modifier.fillMaxWidth().padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                items(events.value) { event ->
+                    EventCard(event = event, navController = navController, repository = repository)
+                }
             }
         }
     }
+    }
+
+    @Composable
+    private fun EventCard(event: Event, navController: NavController, repository: EventRepository) {
+        val coroutineScope = rememberCoroutineScope()
+
+
+        Surface(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
+            shadowElevation = 4.dp,
+            color = Color.White,
+            shape = RoundedCornerShape(8.dp)
+        ) {
+            Column(
+                modifier = Modifier.padding(5.dp)
+            ) {
+                CardLayout(label = "Event:", value = event.title)
+                CardLayout(label = "Date:", value = event.date)
+                CardLayout(label = "Time:", value = "${event.startTime} to ${event.endTime}")
+                CardLayout(label = "Location:", value = event.location)
+
+                Spacer(modifier = Modifier.height(8.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    PrimaryButton(
+                        text = "Update",
+                        onClick = { navController.navigate("UpdateEvent/${event.id}") },
+                        modifier = Modifier.shadow(4.dp)
+                    )
+                    SecondaryButton(
+                        "Delete",
+                        onClick = {
+                            coroutineScope.launch {
+                                repository.delete(event)
+                            }
+                        },
+                        modifier = Modifier.shadow(4.dp)
+                    )
+                }
+
+            }
+        }
 }
 
-@Composable
-private fun EventCard(event: Event, navController: NavController, repository: EventRepository) {
-    val coroutineScope = rememberCoroutineScope()
-
-
-    Surface(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp),
-        shadowElevation = 4.dp,
-        color = Color.White,
-        shape = RoundedCornerShape(8.dp)
-    ) {
-        Column(
-            modifier = Modifier.padding(5.dp)
-        ) {
-            CardLayout(label = "Event:", value = event.title)
-            CardLayout(label = "Date:", value = event.date)
-            CardLayout(label = "Time:", value = "${event.startTime} to ${event.endTime}")
-            CardLayout(label = "Location:", value = event.location)
-
-            Spacer(modifier = Modifier.height(8.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                PrimaryButton(
-                    text = "Update",
-                    onClick = { navController.navigate("UpdateEvent/${event.id}")  },
-                    modifier = Modifier.shadow(4.dp)
-                )
-                SecondaryButton("Delete",
-                    onClick = {
-                        coroutineScope.launch {
-                            repository.delete(event) }
-                    },
-                    modifier = Modifier.shadow(4.dp))
-            }
-
-        }
-    }}
+    @Composable
+    fun ViewAllEventsPreview() {
+        val navController = rememberNavController()
+        ViewAllEvents(navController = navController)
+    }

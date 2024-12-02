@@ -31,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.myuniapp.R
 import com.example.myuniapp.ui.theme.atoms.HeaderLogin
 import com.google.firebase.auth.FirebaseAuth
@@ -65,7 +66,12 @@ fun RegisterUser(onRegisterSuccess: () -> Unit, SwitchToLogin: () -> Unit) {
             Spacer(modifier = Modifier.height(16.dp))
 
 
-            Text(text = "Register", fontSize = 24.sp, fontWeight = FontWeight.Bold, color = Color.White)
+            Text(
+                text = "Register",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -100,14 +106,12 @@ fun RegisterUser(onRegisterSuccess: () -> Unit, SwitchToLogin: () -> Unit) {
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    // Show error message if any
                     if (errorMessage.isNotEmpty()) {
                         Text(text = errorMessage, color = Color.Red, fontSize = 14.sp)
                     }
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    // Register button
                     Button(onClick = {
                         registerStudent(auth, firestore, email, password, onSuccess = {
                             onRegisterSuccess()
@@ -164,3 +168,11 @@ private fun registerStudent(
         }
 }
 
+    @Preview(showBackground = true)
+    @Composable
+    fun RegisterUserPreview() {
+        RegisterUser(
+            onRegisterSuccess = { },
+            SwitchToLogin = { }
+        )
+    }

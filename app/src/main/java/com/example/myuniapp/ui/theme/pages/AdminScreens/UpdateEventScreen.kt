@@ -47,7 +47,7 @@ import kotlinx.coroutines.launch
 
 //    LaunchedEffect(eventId) {
 //        repository.getEventById(eventId).collect { event ->
-//            event?.let {
+//
 //                eventName = it.title
 //                eventDate = it.date
 //                startTime = it.startTime

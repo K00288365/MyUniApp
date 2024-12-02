@@ -16,11 +16,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.myuniapp.IconGroup
+import androidx.navigation.compose.rememberNavController
+import com.example.myuniapp.MyApp
 import com.example.myuniapp.ui.theme.theme.myPrimaryColour
 
 @Composable
@@ -46,8 +48,10 @@ fun BottomNavBar(navController: NavHostController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    NavigationBar(modifier = Modifier.height(65.dp),
-        contentColor = myPrimaryColour) {
+    NavigationBar(
+        modifier = Modifier.height(65.dp),
+        contentColor = myPrimaryColour
+    ) {
         screens.forEach { screen ->
             val isSelected = currentDestination?.route == screen.route
             val labelText = icons[screen]?.label ?: ""
@@ -92,11 +96,9 @@ fun BottomNavBar(navController: NavHostController) {
     }
 }
 
-//        @Preview
-//        @Composable
-//        private fun MainPageNavigationBarPreview() {
-//            val navController = rememberNavController()
-//            FAAV2Theme(dynamicColor = false) {
-//                MainPageNavigationBar(navController)
-//            }
-//        }
+    @Preview(showBackground = true)
+    @Composable
+    fun BottomNavBarPreview() {
+        val navController = rememberNavController()
+        BottomNavBar(navController = navController)
+    }

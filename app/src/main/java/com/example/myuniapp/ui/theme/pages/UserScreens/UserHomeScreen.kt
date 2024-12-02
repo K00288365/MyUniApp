@@ -25,9 +25,11 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
@@ -41,26 +43,26 @@ fun AdminHomeScreen(navController: NavHostController) {
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-            item {
-                Spacer(modifier = Modifier.height(64.dp))
-            }
-            item {
-                Header()
-            }
-            item {
-                Description()
-            }
-            item {
-                MemberCount()
-            }
-            item {
-                UpcomingEvents(navController)
-            }
-            item {
-                ContactInformation()
-            }
+        item {
+            Spacer(modifier = Modifier.height(64.dp))
+        }
+        item {
+            Header()
+        }
+        item {
+            Description()
+        }
+        item {
+            MemberCount()
+        }
+        item {
+            UpcomingEvents(navController)
+        }
+        item {
+            ContactInformation()
         }
     }
+}
 
 @Composable
 fun Header() {
@@ -97,7 +99,7 @@ fun Description() {
                 fontSize = 20.sp
             )
             Button(
-                onClick = {  },
+                onClick = { },
                 colors = buttonColors(containerColor = Color(0xFF98E4CE)),
                 shape = RoundedCornerShape(5.dp),
                 modifier = Modifier.shadow(4.dp)
@@ -183,7 +185,7 @@ fun UpcomingEvents(navController: NavHostController) {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Button(
-                onClick = { navController.navigate("AddEvent")  },
+                onClick = { navController.navigate("AddEvent") },
                 colors = buttonColors(containerColor = Color(0xFF98E4CE)),
                 shape = RoundedCornerShape(5.dp),
                 modifier = Modifier.shadow(4.dp)
@@ -196,7 +198,7 @@ fun UpcomingEvents(navController: NavHostController) {
                 )
             }
             Button(
-                onClick = {  },
+                onClick = { },
                 colors = buttonColors(containerColor = Color(0xFF98E4CE)),
                 shape = RoundedCornerShape(5.dp),
                 modifier = Modifier.shadow(4.dp)
@@ -302,9 +304,15 @@ fun ContactDetail(label: String, value: String) {
                 fontSize = 18.sp,
                 modifier = Modifier.align(Alignment.CenterStart)
             )
-            
+
         }
     }
 }
+
+    @Preview(showBackground = true)
+    @Composable
+    fun AdminHomeScreenPreview() {
+        AdminHomeScreen(navController = rememberNavController())
+    }
 
 

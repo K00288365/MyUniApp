@@ -36,5 +36,14 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState) {
         }) {
             Text("Add Event")
         }
+
+        TextButton(onClick = {
+            coroutineScope.launch {
+                drawerState.close()
+                navController.navigate("ViewAllEvents")
+            }
+        }) {
+            Text("View All Events")
+        }
     }
 }
