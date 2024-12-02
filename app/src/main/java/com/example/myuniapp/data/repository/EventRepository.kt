@@ -10,7 +10,8 @@ class EventRepository(application: Application) {
 
         fun getAllEvents(): Flow<List<Event>> = eventDao.getAllEvents()
 
-//        suspend fun getEvent(id: Int) = eventDao.getFirstEvent(id)
+
+        fun getEventById(id: Int): Flow<Event?> = eventDao.getEventById(id)
 
         suspend fun insert(event: Event){
                 eventDao.insert(event)

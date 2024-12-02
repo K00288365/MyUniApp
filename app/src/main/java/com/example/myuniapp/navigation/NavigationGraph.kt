@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import com.example.myuniapp.ui.theme.pages.AdminScreens.AdminHomeScreen
 import com.example.myuniapp.ui.theme.pages.AdminScreens.ViewAllEvents
 import com.example.myuniapp.ui.theme.pages.AdminScreens.AddEventScreen
+import com.example.myuniapp.ui.theme.pages.AdminScreens.UpdateEventScreen
 
 
 @Composable
@@ -20,9 +21,9 @@ fun NavigationGraph(
         composable("AddEvent") {
             AddEventScreen(navController)
         }
-//        composable("UpdateEvent") {
-//                UpdateEventScreen(navController)
-//            }
+        composable("UpdateEvent") {
+                UpdateEventScreen(navController)
+            }
 
         composable("ViewAllEvents") {
             ViewAllEvents(navController)

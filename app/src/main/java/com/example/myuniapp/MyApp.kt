@@ -12,6 +12,7 @@ import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,11 +20,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.example.fourpageapp.navigation.DrawerContent
+import com.example.myuniapp.navigation.BottomNavBar
 import com.example.myuniapp.ui.theme.pages.UserScreens.RegisterUser
 import com.example.myuniapp.navigation.NavigationGraph
+import com.example.myuniapp.ui.theme.theme.myPrimaryColour
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import kotlinx.coroutines.launch
@@ -70,13 +74,22 @@ fun MyApp() {
                             }) {
                                 Icon(Icons.Filled.ExitToApp, contentDescription = "Logout")
                             }
-
-                        }
+                        },
+                        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                            containerColor = myPrimaryColour,
+                            titleContentColor = Color.Black,
+                            navigationIconContentColor = Color.Black
+                        )
                     )
-                }
+                },
+                bottomBar = {
+                    BottomNavBar(navController)
+                },
             ) { paddingValues ->
                 NavigationGraph(
-                    navController = navController, paddingValues)
+                    navController = navController,
+                    paddingValues = paddingValues
+                )
             }
         }
     } else {

@@ -51,7 +51,9 @@ fun AdminHomeScreen(navController: NavHostController) {
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFFFAFAFA))
-            .padding(16.dp),
+            .padding(14.dp)
+            .padding(top = 20.dp, bottom = 70.dp),
+
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         item {

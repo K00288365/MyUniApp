@@ -43,8 +43,8 @@ fun ViewAllEvents(navController: NavController) {
     val events = remember { mutableStateOf<List<Event>>(emptyList()) }
 
     LaunchedEffect(Unit) {
-        repository.getAllEvents().collect { newEvents ->
-            events.value = newEvents
+        repository.getAllEvents().collect { eventList ->
+            events.value = eventList
         }
     }
 
@@ -115,7 +115,7 @@ private fun EventCard(event: Event, navController: NavController, repository: Ev
             ) {
                 PrimaryButton(
                     text = "Update",
-                    onClick = { navController.navigate("AddEvent") },
+                    onClick = { navController.navigate("UpdateEvent/${event.id}")  },
                     modifier = Modifier.shadow(4.dp)
                 )
                 SecondaryButton("Delete",

@@ -24,8 +24,10 @@ import com.example.myuniapp.ui.theme.molecules.Snackbar
 import kotlinx.coroutines.launch
 
 @Composable
-fun UpdateEventScreen(navController: NavController) {
-    var eventName by remember { mutableStateOf("") }
+//fun UpdateEventScreen(navController: NavController, eventId: Int) {
+    fun UpdateEventScreen(navController: NavController) {
+
+        var eventName by remember { mutableStateOf("") }
     var eventDate by remember { mutableStateOf("") }
     var startTime by remember { mutableStateOf("") }
     var endTime by remember { mutableStateOf("") }
@@ -42,6 +44,18 @@ fun UpdateEventScreen(navController: NavController) {
 
     val context = LocalContext.current.applicationContext
     val repository = EventRepository(context as Application)
+
+//    LaunchedEffect(eventId) {
+//        repository.getEventById(eventId).collect { event ->
+//            event?.let {
+//                eventName = it.title
+//                eventDate = it.date
+//                startTime = it.startTime
+//                endTime = it.endTime
+//                location = it.location
+//            }
+//        }
+//    }
 
     fun resetForm() {
         eventName = ""
@@ -61,7 +75,8 @@ fun UpdateEventScreen(navController: NavController) {
         Spacer(Modifier.padding(30.dp))
         Header("Update Event")
 
-        EventForm(eventName = eventName,
+        EventForm(
+            eventName = eventName,
             onEventNameChange = { eventName = it },
             eventDate = eventDate,
             onEventDateChange = { eventDate = it },
@@ -87,15 +102,17 @@ fun UpdateEventScreen(navController: NavController) {
                 if (eventNameError.isEmpty() && eventDateError.isEmpty() && startTimeError.isEmpty() &&
                     endTimeError.isEmpty() && locationError.isEmpty()
                 ) {
-
-                    val event = Event(
-                        title = eventName, date = eventDate,
-                        startTime = startTime, endTime = endTime, location = location
-                    )
+//                    val updatedEvent = Event(
+//                        id = eventId,
+//                        title = eventName,
+//                        date = eventDate,
+//                        startTime = startTime,
+//                        endTime = endTime,
+//                        location = location
+//                    )
 
                     coroutineScope.launch {
-                        repository.insert(event)
-                        snackbarHostState.showSnackbar("Event added successfully!")
+                        snackbarHostState.showSnackbar("Event updated successfully!")
                         navController.navigate("ViewAllEvents")
                     }
                 } else {
@@ -106,6 +123,7 @@ fun UpdateEventScreen(navController: NavController) {
             },
             resetForm = { resetForm() }
         )
+
         Snackbar(snackbarHostState = snackbarHostState)
     }
 }

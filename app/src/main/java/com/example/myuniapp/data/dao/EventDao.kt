@@ -23,6 +23,9 @@ interface EventDao {
     @Query("SELECT * FROM events LIMIT 1")
     suspend fun getFirstEvent(): Event
 
-    @Query("SELECT * from events ORDER BY date ASC")
+    @Query("SELECT * FROM events")
     fun getAllEvents(): Flow<List<Event>>
+
+    @Query("SELECT * FROM events WHERE id = :id")
+    fun getEventById(id: Int): Flow<Event?>
 }
