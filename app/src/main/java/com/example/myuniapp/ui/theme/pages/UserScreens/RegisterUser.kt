@@ -162,7 +162,7 @@ private fun registerStudent(
                     }
 
             } else {
-                onError("Failed to register user")
+                onError("Failed to register")
                 Log.e(TAG, "Authentication failed")
             }
         }
